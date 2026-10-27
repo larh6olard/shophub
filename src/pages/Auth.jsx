@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hook/useAuth";
-import { LockKeyhole, Mail } from "lucide-react";
+import { LockKeyhole, Mail, X } from "lucide-react";
 import { motion } from "motion/react";
 
 const Auth = () => {
@@ -49,12 +49,11 @@ const Auth = () => {
           {error && (
             <div className="bg-red-200 p-2 border-l-3 border-l-red-700 mb-2 flex justify-between text-sm">
               {error}{" "}
-              <span
+              <X size={1} 
                 className="cursor-pointer bg-red-500 text-white size-6 text-center rounded-full font-semibold flex justify-center items-center hover:bg-red-700 transition-colors"
                 onClick={() => setError(null)}
-              >
-                X
-              </span>
+              />
+            
             </div>
           )}
           <form action="" autoComplete="on" onSubmit={handleSubmit(onSubmit)}>
