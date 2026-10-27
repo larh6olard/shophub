@@ -40,7 +40,7 @@ const Auth = () => {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
         viewport={{ once: true }}
-        className="bg-white w-full max-w-md rounded-lg p-8 mt-14 shadow-lg/20"
+        className="bg-white w-full max-w-md max-sm:mx-10 rounded-lg p-8 mt-14 shadow-lg/20"
       >
         <h2 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-8">
           {mode === "signup" ? "Sign Up" : "Login"}

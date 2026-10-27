@@ -24,19 +24,19 @@ const ProductCard = ({ product }) => {
         alt="wireless headphone"
         className="w-full rounded-tr-xl rounded-tl-xl h-64 object-cover overflow-clip"
       />
-      <div className="p-7 space-y-2">
+      <div className="p-7 space-y-2 text-[15px]">
         <h3 className="font-bold text-xl text-gray-800">{product.name}</h3>
         <p className="text-blue-600 font-bold text-2xl">${product.price}</p>
         <div className="space-x-2.5">
           <Link
             to={`product/${product.id}`}
-            className="bg-gray-600 cursor-pointer font-medium inline-block rounded-sm px-3 py-2 text-white transition-all duration-200 hover:bg-gray-700"
+            className="bg-gray-600 cursor-pointer font-medium inline-block rounded-sm p-2 text-white transition-all duration-200 hover:bg-gray-700"
           >
             View Details
           </Link>
           <button
             type="button"
-            className="cursor-pointer font-medium inline-block rounded-sm px-3 py-2 text-white transition-all duration-200 bg-[var(--signup-color)] hover:bg-blue-700"
+            className="cursor-pointer font-medium inline-block rounded-sm p-2 text-white transition-all duration-200 bg-[var(--signup-color)] hover:bg-blue-700"
             onClick={() => addToCart(product.id)}
           >
             Add to Cart{" "}
