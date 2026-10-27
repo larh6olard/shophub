@@ -1,388 +1,85 @@
-# React E-Commerce Project — Beginner to Full App
+# ShopHub
 
-This repository contains the complete **React e-commerce application** built throughout the course.
-The project is designed to take you from **zero React knowledge** to building a **real, production-style application** using modern React patterns.
+A responsive e-commerce front end built with React. Users can browse products, view details, sign up or log in, manage a personal cart, and place an order at checkout.
 
----
+**Live demo:** [https://shophub-five-alpha.vercel.app/](https://shophub-five-alpha.vercel.app/)
 
-## 🤖 CodeRabbit Integration (Required)
+## Features
 
-This project uses **CodeRabbit** to automatically review pull requests and catch bugs, best-practice issues, and improvements.
+- **Product catalogue:** browse a grid of products on the home page, with a dedicated details page for each item (`/product/:id`).
+- **Authentication:** sign up and log in with form validation (valid email, password of 8–15 characters).
+- **Persistent cart:** add items, adjust quantities, or remove them. Each user's cart is saved separately and restored on login.
+- **Protected checkout:** the checkout page is only accessible to logged-in users. It shows an order summary, subtotal, and total (including a flat $3.50 fee).
+- **Responsive layout:** desktop navbar and a slide-in mobile menu.
+- **Animations:** scroll-triggered and entrance animations with Motion.
+- **Routing extras:** scroll-to-top on navigation and a 404 page for unknown routes.
 
-### How to Integrate CodeRabbit
+## Tech Stack
 
-1. Go to **[https://coderabbit.link/pedro](https://coderabbit.link/pedro)**
-2. Install CodeRabbit on your GitHub account
-3. Enable it for this repository
-4. Open a Pull Request
-5. CodeRabbit will automatically:
-   - Review your code
-   - Leave inline comments
-   - Highlight bugs, anti-patterns, and improvements
+- [React](https://react.dev/) with Hooks and the Context API
+- [React Router](https://reactrouter.com/) for routing
+- [React Hook Form](https://react-hook-form.com/) for form handling and validation
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [Motion](https://motion.dev/) for animations
+- [Lucide React](https://lucide.dev/) for icons
+- [Vercel](https://vercel.com/) for deployment
 
-> Code reviews are an essential part of real-world development.
-> CodeRabbit simulates having a senior developer reviewing your work.
+## Project Structure
 
----
+```
+src/
+├── components/     # Navbar, Footer, ProductCard, ProtectedRoute, ScrollToTop
+├── context/        # AuthContext, CartContext
+├── data/           # products.js (static product data)
+├── hook/           # useAuth, useCart
+├── pages/          # Home, Auth, ProductDetails, Checkout, NotFound
+├── App.jsx         # Routes and providers
+├── main.jsx        # App entry point
+└── index.css       # Tailwind setup and theme
+```
 
-## 📚 Topics Covered (With Code)
+## Getting Started
 
----
+### Prerequisites
 
-## 1. Project Setup & Tooling
+- [Node.js](https://nodejs.org/) (v18 or later recommended)
+- npm
 
-We initialize the project using **Vite**, which provides a fast development environment.
+### Installation
 
 ```bash
-npm create vite@latest
+# Clone the repository
+git clone https://github.com/larh6olard/shophub.git
+cd <your-repo-folder>
+
+# Install dependencies
 npm install
+
+# Start the development server
 npm run dev
 ```
 
-We clean up boilerplate files to start with a minimal structure.
+Then open the local URL shown in your terminal.
 
----
+## How It Works
 
-## 2. React Fundamentals
+- **Data:** products are stored in a static array in `src/data/products.js`. There is no backend.
+- **Auth:** accounts and the active session are stored in the browser's `localStorage`. Protected routes check for a saved session.
+- **Cart:** state lives in `CartContext` and is saved per user under a `cart_<email>` key, so each account keeps its own cart.
+- **Orders:** placing an order shows a confirmation alert and clears the cart. No payment or order data is sent anywhere.
 
-### Components & JSX
+## Notes
 
-Components are functions that return JSX.
+This is a front-end demo project. Because authentication uses `localStorage` and passwords are stored in plain text in the browser, **do not use real credentials**. A production version would need a backend with secure authentication and payment processing.
 
-```jsx
-function Button() {
-  return <button>Click me</button>;
-}
-```
+## Possible Improvements
 
-JSX allows us to mix JavaScript and HTML-like syntax.
+- Connect to a backend API and database
+- Secure authentication (hashed passwords, tokens)
+- Real payment integration
+- Search, filtering, and sorting for products
+- Order history
 
----
+## Author
 
-## 3. Props & Component Communication
-
-Props allow components to receive data.
-
-```jsx
-function Product({ name }) {
-  return <h2>{name}</h2>;
-}
-```
-
-Used to make components reusable and dynamic.
-
----
-
-## 4. State Management with `useState`
-
-State allows components to store and update data.
-
-```jsx
-const [count, setCount] = useState(0);
-
-<button onClick={() => setCount(count + 1)}>+</button>;
-```
-
-We use state for:
-
-- Forms
-- Errors
-- UI updates
-- Cart logic
-
----
-
-## 5. Event Handling
-
-React uses camelCase event handlers.
-
-```jsx
-<input onChange={(e) => setEmail(e.target.value)} />
-```
-
-Used for:
-
-- Form inputs
-- Buttons
-- User interactions
-
----
-
-## 6. Conditional Rendering
-
-Render UI based on conditions.
-
-```jsx
-{
-  error && <p>{error}</p>;
-}
-```
-
-Used for:
-
-- Errors
-- Auth state
-- Cart indicators
-
----
-
-## 7. Authentication Logic (Frontend)
-
-We implement **signup and login logic** using in-memory data and localStorage.
-
-```js
-const user = users.find((u) => u.email === email && u.password === password);
-
-if (!user) {
-  return { success: false, error: "Invalid email or password" };
-}
-```
-
-We intentionally return **generic errors** for security reasons.
-
----
-
-## 8. Persisting Auth State
-
-We store logged-in users in `localStorage`.
-
-```js
-localStorage.setItem("user", JSON.stringify(user));
-```
-
-This allows session persistence on refresh.
-
----
-
-## 9. React Context API
-
-Context allows sharing global state.
-
-```jsx
-export const AuthContext = createContext();
-
-<AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>;
-```
-
-Used for:
-
-- Authentication
-- Cart state
-
----
-
-## 10. Custom Hooks
-
-Custom hooks abstract reusable logic.
-
-```js
-export function useAuth() {
-  return useContext(AuthContext);
-}
-```
-
-This removes repetitive imports and improves readability.
-
----
-
-## 11. Routing with React Router
-
-We define application routes.
-
-```jsx
-<Route path="/" element={<Home />} />
-<Route path="/login" element={<Login />} />
-```
-
-Used for page navigation.
-
----
-
-## 12. Programmatic Navigation
-
-We redirect users using `useNavigate`.
-
-```js
-const navigate = useNavigate();
-navigate("/");
-```
-
-Used after login and error handling.
-
----
-
-## 13. Dynamic Routes & URL Params
-
-Dynamic routes allow variable URLs.
-
-```jsx
-<Route path="/products/:id" element={<ProductDetails />} />
-```
-
-Access params using:
-
-```js
-const { id } = useParams();
-```
-
----
-
-## 14. Side Effects with `useEffect`
-
-Run logic when components render.
-
-```js
-useEffect(() => {
-  fetchProduct();
-}, [id]);
-```
-
-Used for:
-
-- Fetching data
-- Syncing UI with params
-
----
-
-## 15. Handling Loading & Null States
-
-Prevent crashes when data is unavailable.
-
-```jsx
-if (!product) return <h1>Loading...</h1>;
-```
-
-Essential for real-world apps.
-
----
-
-## 16. Product System
-
-We render products dynamically.
-
-```jsx
-products.map((product) => <ProductCard key={product.id} product={product} />);
-```
-
-Each product has:
-
-- ID
-- Name
-- Price
-- Image
-- Description
-
----
-
-## 17. Cart Context (Global State)
-
-Cart items stored as:
-
-```js
-{ id: 2, quantity: 3 }
-```
-
-Cart state lives in Context so it’s accessible everywhere.
-
----
-
-## 18. Adding Items to Cart
-
-Prevent duplicate entries.
-
-```js
-if (existingItem) {
-  quantity += 1;
-} else {
-  add new item
-}
-```
-
-State updates are immutable.
-
----
-
-## 19. Updating Cart Quantities
-
-We update items using `map`.
-
-```js
-cartItems.map((item) =>
-  item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
-);
-```
-
----
-
-## 20. Removing Items from Cart
-
-Remove items using `filter`.
-
-```js
-cartItems.filter((item) => item.id !== id);
-```
-
----
-
-## 21. Checkout Page
-
-Displays:
-
-- Cart items
-- Quantity controls
-- Total price
-
-```js
-const total = cartItems.reduce((sum, item) => {
-  return sum + item.price * item.quantity;
-}, 0);
-```
-
----
-
-## 22. Placing an Order (Mock)
-
-Simulates checkout.
-
-```js
-alert("Order placed!");
-clearCart();
-```
-
-Used to demonstrate full flow.
-
----
-
-## 23. Accessibility & Best Practices
-
-- Keys in lists
-- Avoiding span buttons
-- Cleaning console logs
-- Handling edge cases
-
----
-
-## 24. Deployment with Vercel
-
-Deploy the app publicly.
-
-```text
-Vercel → Import GitHub Repo → Deploy
-```
-
-Works for any React app, not just Next.js.
-
----
-
-## 🎯 Learning Outcome
-
-After finishing this project, you can:
-
-- Build React apps from scratch
-- Manage complex UI state
-- Use Context & custom hooks
-- Implement routing and auth flows
-- Build real-world features
-- Deploy production apps
-
----
+Built by Habeeb Lasisi.
