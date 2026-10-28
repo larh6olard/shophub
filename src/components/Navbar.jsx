@@ -3,8 +3,10 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../hook/useAuth";
 import useCart from "../hook/useCart";
 import { motion } from "motion/react";
+import ThemeToggleBtn from "./ThemeToggle";
+import { MenuSquareIcon } from "lucide-react";
 
-const Navbar = () => {
+const Navbar = ({ theme, setTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const { clearCart } = useCart();
@@ -21,7 +23,7 @@ const Navbar = () => {
   };
 
   const navLinkClass = {
-    normal: `font-medium flex justify-center items-center hover:text-white transition-all duration-200  p-2 w-42 rounded-xl hover:bg-blue-400 text-gray-800 hover:scale-105`,
+    normal: `font-medium flex justify-center items-center hover:text-white transition-all duration-200  p-2 w-42 rounded-xl hover:bg-blue-400 text-gray-800 dark:bg-white hover:scale-105 dark:text-black`,
   };
 
   return (
@@ -30,7 +32,7 @@ const Navbar = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
       viewport={{ once: true }}
-      className="fixed right-0 left-0 bg-white w-full z-10"
+      className="fixed right-0 left-0 bg-white w-full z-10 dark:bg-gray-900 dark:text-white"
     >
       {/* Dark Overlay */}
       {isMenuOpen && (
@@ -46,24 +48,23 @@ const Navbar = () => {
           <Link to="/" className="font-bold text-2xl">
             ShopHub
           </Link>
-          <button type="button" className="cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="26px"
-              viewBox="0 -960 960 960"
-              width="26px"
-              fill="#1f1f1f"
-              onClick={handleToggle}
-            >
-              <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-            </svg>
-          </button>
+          <div className="flex gap-7 items-center">
+            <ThemeToggleBtn theme={theme} setTheme={setTheme} />
+            <button type="button" className="cursor-pointer">
+              <MenuSquareIcon
+                size={26}
+                strokeWidth={1.5}
+                color={theme === "light" ? "black" : "white"}
+                onClick={handleToggle}
+              />
+            </button>
+          </div>
         </div>
 
         {/* Mobile Nav Links */}
-        <div className="">
+        <div>
           <div
-            className={`flex flex-col space-y-5 bg-gray-100 w-70 items-center h-screen py-30 top-0 right-0 fixed z-50 transform transition-transform duration-300 ease-in-out shadow-lg/20 ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+            className={`flex flex-col space-y-5 bg-gray-100 dark:bg-gray-600 w-70 items-center h-screen py-30 top-0 right-0 fixed z-50 transform transition-transform duration-300 ease-in-out shadow-lg/20 ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
           >
             <button
               type="button"
@@ -85,7 +86,7 @@ const Navbar = () => {
               to="/"
               onClick={() => setIsMenuOpen(false)}
               className={({ isActive }) =>
-                `${navLinkClass.normal} ${isActive ? "bg-blue-400 text-white" : "bg-gray-300"}`
+                `${navLinkClass.normal} ${isActive ? "bg-blue-500 text-white" : "bg-gray-300"}`
               }
             >
               <svg
@@ -191,11 +192,11 @@ const Navbar = () => {
               ShobHub
             </Link>
           </div>
-          <div className="space-x-10 font-semibold text-gray-700">
+          <div className="space-x-10 font-semibold text-gray-700 flex items-center">
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `hover:text-blue-500 transition-colors duration-200 text-lg ${isActive ? "text-blue-500" : ""}`
+                `hover:text-blue-500 dark:hover:text-blue-300 transition-colors duration-200 text-lg dark:text-white ${isActive ? "text-blue-500 dark:text-blue-400" : ""}`
               }
             >
               Home
@@ -203,7 +204,7 @@ const Navbar = () => {
             <NavLink
               to="/checkout"
               className={({ isActive }) =>
-                `hover:text-blue-500 transition-colors duration-200 text-lg ${isActive ? "text-blue-500" : ""}`
+                `hover:text-blue-500 dark:hover:text-blue-300 transition-colors duration-200 text-lg dark:text-white ${isActive ? "text-blue-500 dark:text-blue-400" : ""}`
               }
             >
               Cart
@@ -211,10 +212,13 @@ const Navbar = () => {
           </div>
 
           {!user ? (
-            <div className="space-x-5">
+            <div className="flex items-center space-x-5">
+              <div className="mr-10">
+                <ThemeToggleBtn theme={theme} setTheme={setTheme} />
+              </div>
               <Link
                 to="/auth"
-                className="bg-gray-600 cursor-pointer text-lg font-medium inline-block rounded-sm px-4 py-3 text-white transition-all duration-200 hover:bg-gray-700 hover:-translate-y-0.5"
+                className="bg-gray-600 cursor-pointer text-lg font-medium inline-block rounded-sm px-4 py-3 text-white transition-all duration-200 hover:bg-gray-700 hover:-translate-y-0.5 dark:bg-gray-500"
               >
                 Login
               </Link>
@@ -226,14 +230,19 @@ const Navbar = () => {
               </Link>
             </div>
           ) : (
-            <div className="space-x-7">
-              <span className="font-semibold text-gray-700">
+            <div className="space-x-7 flex items-center">
+              <span className="font-semibold text-gray-700 dark:text-white">
                 Hello, {user.email}
               </span>
+              {user && (
+                <div className="">
+                  <ThemeToggleBtn theme={theme} setTheme={setTheme} />
+                </div>
+              )}
               <button
                 type="button"
                 onClick={handleLogout}
-                className="bg-red-800 text-white cursor-pointer text-lg font-medium inline-block rounded-sm px-4 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-600"
+                className="bg-red-800 text-white cursor-pointer text-lg font-medium inline-block rounded-sm px-4 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700"
               >
                 Logout
               </button>

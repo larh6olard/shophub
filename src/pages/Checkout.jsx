@@ -31,13 +31,13 @@ const Checkout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-28 md:py-32 px-10 md:px-24">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-800 dark:text-white py-28 md:py-32 px-10 md:px-24">
       <motion.h2
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
         viewport={{ once: true }}
-        className="text-3xl font-bold text-gray-800"
+        className="text-3xl font-bold text-gray-800 dark:text-white"
       >
         Checkout
       </motion.h2>
@@ -47,9 +47,9 @@ const Checkout = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
-          className="p-8 bg-white shadow-lg rounded-lg space-y-4 md:w-2/3"
+          className="p-8 bg-white dark:bg-gray-700 shadow-lg rounded-lg space-y-4 md:w-2/3 dark:border dark:border-gray-500 dark:shadow-2xl"
         >
-          <h3 className="text-gray-800 font-bold text-2xl mb-8">
+          <h3 className="text-gray-800 dark:text-white font-bold text-2xl mb-8">
             Order Summary
           </h3>
           {cartItems.map((item) => (
@@ -60,14 +60,14 @@ const Checkout = () => {
                   alt={item.product.name}
                   className="size-30 rounded-md"
                 />
-                <p className="text-gray-800 font-bold text-xl">
+                <p className="text-gray-800 dark:text-white font-bold text-xl">
                   {item.product.name}
                 </p>
-                <p className="text-gray-700">$ {item.product.price} each</p>
+                <p className="text-gray-700 dark:text-white">$ {item.product.price} each</p>
                 <div className="flex space-x-4 items-center font-semibold">
                   <button
                     type="button"
-                    className="border border-gray-300 w-7 text-lg cursor-pointer hover:bg-gray-200 transition-colors duration-150"
+                    className="border border-gray-300 w-7 text-lg cursor-pointer hover:bg-gray-200 dark:hover:text-black transition-colors duration-150"
                     onClick={() => updateQuantity(item.id, item.quantity - 1)}
                   >
                     -
@@ -75,28 +75,28 @@ const Checkout = () => {
                   <p>{item.quantity}</p>
                   <button
                     type="button"
-                    className="border border-gray-300 w-7 font-semibold text-lg cursor-pointer hover:bg-gray-200 transition-colors duration-150"
+                    className="border border-gray-300 w-7 font-semibold text-lg cursor-pointer hover:bg-gray-200 dark:hover:text-black transition-colors duration-150"
                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
                   >
                     +
                   </button>
                 </div>
-                <p className="font-bold text-gray-800 text-lg">
+                <p className="font-bold text-gray-800 dark:text-white/90 text-lg">
                   $ {(item.quantity * item.product.price).toFixed(2)}
                 </p>
                 <button
                   type="button"
-                  className="bg-gray-500 text-white w-24 p-1 rounded-md cursor-pointer hover:bg-gray-700 transition-colors duration-200"
+                  className="bg-gray-500 dark:bg-red-600 dark:hover:bg-red-500 hover:-translate-y-0.5 dark:font-medium text-white w-24 p-1 rounded-md cursor-pointer hover:bg-gray-700 transition-all duration-200"
                   onClick={() => removeFromCart(item.id)}
                 >
                   Remove
                 </button>
               </div>
-              <hr className="my-5 text-gray-300" />
+              <hr className="my-5 text-gray-300 dark:text-gray-500" />
             </div>
           ))}
           {cartItems.length === 0 && (
-            <p className="text-lg font-medium text-gray-700">No orders yet</p>
+            <p className="text-lg font-medium text-gray-700 dark:text-white">No orders yet</p>
           )}
         </motion.div>
 
@@ -105,20 +105,24 @@ const Checkout = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
-          className="p-8 bg-white shadow-lg rounded-lg space-y-6 md:w-1/3 md:h-full md:sticky top-28"
+          className="p-8 bg-white shadow-lg rounded-lg space-y-6 md:w-1/3 md:h-full md:sticky top-28 dark:bg-gray-700 dark:border dark:border-gray-500 dark:text-white dark:shadow-2xl"
         >
-          <h3 className="text-gray-800 text-xl lg:text-2xl font-bold">Total</h3>
+          <h3 className="text-gray-800 text-xl lg:text-2xl font-bold dark:text-white">
+            Total
+          </h3>
           <div className="flex justify-between items-center">
-            <span className="text-gray-700 lg:text-lg">Subtotal:</span>
-            <span className="lg:text-lg text-gray-800">
+            <span className="text-gray-700 lg:text-lg dark:text-white">
+              Subtotal:
+            </span>
+            <span className="lg:text-lg text-gray-800 dark:text-white">
               $ {total.toFixed(2)}
             </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-gray-700 text-xl lg:text-lg">
+            <span className="text-gray-700 text-xl lg:text-lg dark:text-white">
               Total <span className="text-[15px]">{`(tax inclusive)`}</span>:
             </span>
-            <span className="text-xl lg:text-2xl font-bold text-blue-500">
+            <span className="text-xl lg:text-2xl font-bold text-blue-500 dark:text-white">
               $ {total ? (total + 3.5).toFixed(2) : total.toFixed(2)}
             </span>
           </div>

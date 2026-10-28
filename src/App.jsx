@@ -10,14 +10,19 @@ import NotFound from "./pages/NotFound";
 import CartProvider from "./context/CartContext";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { useState } from "react";
 
 function App() {
+  const [theme, setTheme] = useState(
+    localStorage.getItem("c_theme") ? localStorage.getItem("c_theme") : "light",
+  );
+
   return (
     <div>
       <AuthProvider>
         <CartProvider>
           <ScrollToTop />
-          <Navbar />
+          <Navbar theme={theme} setTheme={setTheme} />
           <Routes>
             <Route index path="/" element={<Home />} />
             <Route path="/auth" element={<Auth />} />

@@ -6,7 +6,7 @@ const Home = () => {
   const products = getProducts();
 
   return (
-    <div className="min-h-screen bg-gray-100 pt-18 md:pt-32">
+    <div className="min-h-screen bg-gray-100 pt-18 md:pt-32 dark:bg-gray-800 dark:text-white">
       <div className="text-center px-16 py-26 space-y-6 lg:py-30">
         <motion.h1
           initial={{ opacity: 0, x: -100 }}
@@ -22,7 +22,7 @@ const Home = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-xl tracking-wider text-gray-700"
+          className="text-xl tracking-wider text-gray-700 dark:text-gray-200"
         >
           Discover amazing products at great prices
         </motion.p>

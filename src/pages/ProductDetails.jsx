@@ -31,9 +31,9 @@ const ProductDetails = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
       viewport={{ once: true }}
-      className="min-h-screen bg-gray-100 p-12 pt-32 pb-14 md:pt-44"
+      className="min-h-screen bg-gray-100 dark:bg-gray-800 p-12 pt-32 pb-14 md:pt-44"
     >
-      <div className="bg-white mx-auto rounded-xl p-7 shadow-lg/20 md:flex md:space-x-10">
+      <div className="bg-white dark:bg-gray-700 dark:border dark:border-gray-500 dark:text-white mx-auto rounded-xl p-7 shadow-lg/20 dark:shadow-2xl md:flex md:space-x-10">
         <motion.img
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -50,9 +50,9 @@ const ProductDetails = () => {
           viewport={{ once: true }}
           className="mt-12 space-y-7 md:mt-0"
         >
-          <h3 className="font-bold text-4xl text-gray-800">{product.name}</h3>
-          <p className="text-blue-600 font-bold text-4xl">${product.price}</p>
-          <p className="text-gray-700">{product.description}</p>
+          <h3 className="font-bold text-4xl text-gray-800 dark:text-white">{product.name}</h3>
+          <p className="text-blue-600 dark:text-white font-bold text-4xl">${product.price}</p>
+          <p className="text-gray-700 dark:text-white/90">{product.description}</p>
           <button
             type="button"
             className="bg-blue-600 text-white w-40 p-3 cursor-pointer rounded-lg hover:bg-blue-800 transition-all duration-200 hover:-translate-y-0.5 text-lg font-medium"
