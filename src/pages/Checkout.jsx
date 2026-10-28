@@ -31,7 +31,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-800 dark:text-white py-28 md:py-32 px-10 md:px-24">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-800 dark:text-white py-28 md:py-32 px-5 md:px-16 lg:px-24">
       <motion.h2
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}

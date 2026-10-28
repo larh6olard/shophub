@@ -28,14 +28,14 @@ const Home = () => {
         </motion.p>
       </div>
 
-      <div className="p-10 lg:px-24">
+      <div className="px-5 py-10 lg:px-24 lg:py-12">
         <div className="text-left md:text-center">
           <motion.h2
             initial={{ opacity: 0, scale: 0.4 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
-            className="inline-block text-3xl font-bold text-gray-800 mb-10"
+            className="inline-block text-3xl font-bold text-gray-800 dark:text-white mb-10"
           >
             Our Products
           </motion.h2>

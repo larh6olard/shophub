@@ -31,7 +31,7 @@ const ProductDetails = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
       viewport={{ once: true }}
-      className="min-h-screen bg-gray-100 dark:bg-gray-800 p-12 pt-32 pb-14 md:pt-44"
+      className="min-h-screen bg-gray-100 dark:bg-gray-800 px-5 py-12 lg:p-12 pt-32 pb-14 md:pt-44"
     >
       <div className="bg-white dark:bg-gray-700 dark:border dark:border-gray-500 dark:text-white mx-auto rounded-xl p-7 shadow-lg/20 dark:shadow-2xl md:flex md:space-x-10">
         <motion.img
