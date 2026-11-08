@@ -25,16 +25,16 @@ const ThemeToggleBtn = ({theme, setTheme}) => {
     <>
       {theme === "light" ? (
         <Moon
-          className="cursor-pointer"
-          size={25}
+          className="cursor-pointer border rounded-full p-0.5 border-gray-500"
+          size={26}
           strokeWidth={2.4}
           onClick={() => setTheme("dark")}
         />
       ) : (
         <Sun
-          className="cursor-pointer"
+          className="cursor-pointer border rounded-full p-0.5 border-gray-200"
           color="white"
-          size={25}
+          size={26}
           strokeWidth={2.4}
           onClick={() => setTheme("light")}
         />
