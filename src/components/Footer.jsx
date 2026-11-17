@@ -15,7 +15,7 @@ const Footer = () => {
   }, [currentYear]);
 
   return (
-    <div className="font-bold text-sm text-gray-200 bg-gray-800 py-7 text-center">
+    <div className="font-bold text-sm text-gray-200 bg-gray-800 dark:bg-black py-7 text-center">
       &copy; Larh6olard | {currentYear}
     </div>
   );

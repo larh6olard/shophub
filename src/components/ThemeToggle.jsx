@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Sun, Moon } from "lucide-react";
 
-const ThemeToggleBtn = ({theme, setTheme}) => {
+const ThemeToggleBtn = ({ theme, setTheme }) => {
 
   useEffect(() => {
     const prefersDarkMode = window.matchMedia(
